@@ -192,6 +192,7 @@ multidev_finish() {
 	
 	multidev_merge
 
+
 	read -p "Delete hotfix-up environment? [y/n]  " yn
 	case $yn in
 		[Yy]* ) terminus site delete-env --site=${SITENAME} --env=${MDENV}
@@ -201,11 +202,6 @@ multidev_finish() {
 
 	multidev_deploy_to_live
 	
-	read -p "Delete pantheon-clone folder? [y/n] " yn
-	case $yn in 
-	      [Yy]*) cd ../; echo "deleting pantheon-clone..."; rm -rf pantheon-clone_${SITENAME}	
-	esac
-
 }
 
 multidev_wordpress_update() {
@@ -241,4 +237,15 @@ read -p 'Log out of Terminus? [y/n] ' LOGOUT
         [Yy]* ) terminus auth logout
 
   esac
+
+read -p "Delete pantheon-clone folder? [y/n] " yn
+  case $yn in
+        [Yy]*) cd ..
+               echo "deleting pantheon-clone..." 
+               rm -rf pantheon-clone_${SITENAME};;
+  esac
+
 exit 0
+
+
+
